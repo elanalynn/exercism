@@ -1,8 +1,22 @@
-=begin
-Write your code for the 'Sieve' exercise in this file. Make the tests in
-`sieve_test.rb` pass.
+require 'pry-byebug'
+require 'set'
 
-To get started with TDD, see the `README.md` file in your
-`ruby/sieve` directory.
-=end
+class Sieve
+  def initialize(limit)
+    @limit = limit
+  end
 
+  def primes
+    result = []
+    marked = Set.new
+    (2..@limit).each do |n|
+      m = n
+      while m + n <= @limit
+        m = m + n
+        marked << m
+      end
+      result << n if !marked.include? n
+    end
+    result
+  end
+end
